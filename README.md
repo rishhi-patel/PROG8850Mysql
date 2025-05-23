@@ -17,6 +17,8 @@ To run github actions locally:
 bin/act
 ```
 
+*Note: Tested with Medium size image
+
 To shut down:
 
 ```bash
