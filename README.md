@@ -11,6 +11,12 @@ To use mysql:
 mysql -u root -h 127.0.0.1 -p
 ```
 
+To run github actions locally:
+
+```bash
+bin/act
+```
+
 To shut down:
 
 ```bash
