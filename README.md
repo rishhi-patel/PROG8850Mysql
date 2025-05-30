@@ -11,13 +11,23 @@ To use mysql:
 mysql -u root -h 127.0.0.1 -p
 ```
 
-To run github actions locally:
+To run github actions like (notice that the environment variables default for the local case):
+
+```yaml
+      - name: Deploy to Database
+        env:
+          DB_HOST: ${{ secrets.DB_HOST || '127.0.0.1' }} 
+          DB_USER: ${{ secrets.DB_ADMIN_USER || 'root' }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD  || 'Secret5555'}}
+          DB_NAME: ${{ secrets.DB_NAME || 'mysql' }}
+        run: mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < schema_changes.sql
+```        
+
+locally:
 
 ```bash
-bin/act
+bin/act -P ubuntu-latest=-self-hosted
 ```
-
-*Note: Tested with Medium size image
 
 To shut down:
 
