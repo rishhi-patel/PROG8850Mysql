@@ -32,9 +32,19 @@ To run github actions like (notice that the environment variables default for th
 
 locally:
 
+first try
+
+```bash
+bin/act
+```
+
+then if that doesn't work 
+
 ```bash
 bin/act -P ubuntu-latest=-self-hosted
 ```
+
+to run in the codespace.
 
 To shut down:
 
