@@ -1,55 +1,107 @@
-# PROG8850Week1Installation
-install mysql, python
+# PROG8850 - Assignment 2
+
+**Automating Database Schema Changes and Implementing CI/CD for Database Deployment**
+Total: 20 Points
+
+---
+
+## 🔹 Project Structure
+
+```
+├── create_projects.sql
+├── execute_sql.py
+├── add_departments.sql
+├── run_add_departments.py
+├── requirements.txt
+└── .github
+    └── workflows
+        └── ci_cd_pipeline.yml
+```
+
+---
+
+## 🔹 Question 1: Automating Database Schema Changes
+
+### Files:
+
+- `create_projects.sql` → Creates `projects` table.
+- `execute_sql.py` → Runs `create_projects.sql` and adds `budget` column if it does not exist.
+
+### How to run locally:
+
+1️⃣ Set environment variables in `.env`:
+
+```env
+DB_HOST=your-server.mysql.database.azure.com
+DB_USER=your-admin-user@your-server
+DB_PASSWORD=your-password
+DB_NAME=companydb
+```
+
+2️⃣ Install dependencies:
 
 ```bash
-ansible-playbook up.yml
+pip install -r requirements.txt
 ```
 
-To use mysql:
+3️⃣ Run:
 
 ```bash
-mysql -u root -h 127.0.0.1 -p
+python execute_sql.py
 ```
 
-To run github actions like (notice that the environment variables default for the local case):
+---
 
-```yaml
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+## 🔹 Question 2: CI/CD Pipeline for Database Deployment
 
-      - name: Install MySQL client
-        run: sudo apt-get update && sudo apt-get install -y mysql-client
+### Files:
 
-      - name: Deploy to Database
-        env:
-          DB_HOST: ${{ secrets.DB_HOST || '127.0.0.1' }} 
-          DB_USER: ${{ secrets.DB_ADMIN_USER || 'root' }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD  || 'Secret5555'}}
-          DB_NAME: ${{ secrets.DB_NAME || 'mysql' }}
-        run: mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < schema_changes.sql
-```
+- `.github/workflows/ci_cd_pipeline.yml` → GitHub Actions workflow triggered on push to `main`.
+- `add_departments.sql` → Creates `departments` table.
+- `run_add_departments.py` → Script executed in GitHub Actions.
 
-locally:
+---
 
-first try
+## 🔹 GitHub Actions Environment Variables (Secrets)
+
+The following secrets are configured in GitHub:
+
+| Secret Name   | Value                                |
+| ------------- | ------------------------------------ |
+| `DB_HOST`     | your-server.mysql.database.azure.com |
+| `DB_USER`     | your-admin-user@your-server          |
+| `DB_PASSWORD` | your-password                        |
+
+---
+
+## 🔹 Azure MySQL Configuration
+
+✅ **Server:** Azure Database for MySQL Flexible Server
+✅ **Database:** `companydb`
+✅ **Networking:**
+
+- ✅ Public access: **Enabled**
+- ✅ Public access from Azure services: **Enabled**
+- ✅ Local IP added to Firewall Rules
+
+_Screenshot of Networking settings included in Documentation.pdf._
+
+---
+
+## 🔹 GitHub Actions Testing
+
+- ✅ Pipeline triggers on push to `main`
+- ✅ Runs `run_add_departments.py`
+- ✅ Executes `add_departments.sql`
+- ✅ Successful connection to Azure MySQL
+- ✅ Successful pipeline run screenshot included in Documentation.pdf
+
+---
+
+## 🔹 How to run the pipeline:
 
 ```bash
-bin/act
+git add .
+git commit -m "Final - added pipeline for Assignment 2"
+git push origin main
 ```
-
-then if that doesn't work 
-
-```bash
-bin/act -P ubuntu-latest=-self-hosted
-```
-
-to run in the codespace.
-
-To shut down:
-
-```bash
-ansible-playbook down.yml
-```
-
-This is a reproducible mysql setup
