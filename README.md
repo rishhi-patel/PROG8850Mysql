@@ -76,15 +76,11 @@ The following secrets are configured in GitHub:
 
 ## 🔹 Azure MySQL Configuration
 
-✅ **Server:** Azure Database for MySQL Flexible Server
-✅ **Database:** `companydb`
-✅ **Networking:**
-
+- ✅ **Server:** Azure Database for MySQL Flexible Server
+- ✅ **Database:** `companydb`
 - ✅ Public access: **Enabled**
 - ✅ Public access from Azure services: **Enabled**
-- ✅ Local IP added to Firewall Rules
 
-_Screenshot of Networking settings included in Documentation.pdf._
 
 ---
 
