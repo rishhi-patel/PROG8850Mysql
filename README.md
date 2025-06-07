@@ -105,3 +105,6 @@ git add .
 git commit -m "Final - added pipeline for Assignment 2"
 git push origin main
 ```
+## 🔹 Screenshot:
+![image](https://github.com/user-attachments/assets/a320ced3-bba8-422f-96af-189237c05dc1)
+
